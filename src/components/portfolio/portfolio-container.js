@@ -10,7 +10,7 @@ export default class PortfolioContainer extends Component {
         this.state = {
             isLoading: false,
             pageTitle: "Isaak's Portfolio ",
-            data: []
+            data: [],
         };
 
         this.handleFilter = this.handleFilter.bind(this);
@@ -18,20 +18,23 @@ export default class PortfolioContainer extends Component {
     }
 
     handleFilter (filter) {
-        this.setState({
-            data: this.state.data.filter(i => {
-                return i.category === filter;
-            })
-        });
-    }
+        if (filter === "CLEAR_FILTERS") {this.componentDidMount();} else {
+            this.getPortfolioItems(filter);
+            }
+        }
+    
 
-    getPortfolioItems() {
+    getPortfolioItems(filter = null) {
         axios.get("https://thundernation.devcamp.space/portfolio/portfolio_items")
         .then(response =>  {
-          console.log("response data", response);
-          this.setState({
-              data: response.data.portfolio_items
+            if (filter) {
+        this.setState({
+                data: response.data.portfolio_items.filter(item => { return item.category === filter;}) });
+            } else {
+        this.setState({
+            data: response.data.portfolio_items
           });
+        }
       })
 
       .catch(error =>  {
@@ -62,13 +65,19 @@ export default class PortfolioContainer extends Component {
         }
 
         return(
-            
+            <div>
+                <div className="filter-btn-wrapper">
+                <button className="btn" onClick={() =>this.handleFilter('Technology')}>Technology</button>
+                <button className="btn" onClick={() =>this.handleFilter('School')}>School</button>
+                <button className="btn" onClick={() =>this.handleFilter('SocialMedia')}>Social Media</button>
+                </div>
                 <div className="portfolio-items-container">
-                <button className="btn" onClick={() =>this.handleFilter('eCommerce')}>eCommerce</button>
-                <button className="btn" onClick={() =>this.handleFilter('Scheduling')}>Scheduling</button>
-                <button className="btn" onClick={() =>this.handleFilter('Enterprise')}>Enterprise</button>
                 {this.portfolioItems()}
                 </div>
+                <div className="reset-btn one-column">
+                <button className="btn" onClick={() => this.componentDidMount()}>All Items</button>
+                </div>
+            </div>
             
         );
     }

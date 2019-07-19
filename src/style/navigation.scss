@@ -38,4 +38,16 @@
             color: black;
         }
     }
+
+    .right-side {
+        a {
+            margin-left: 15px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+                color: $teal;
+            }
+        }
+    }
 }

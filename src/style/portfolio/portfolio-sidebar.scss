@@ -1,0 +1,49 @@
+.right-column {
+    .portfolio-sidebar-list-wrapper {
+        .portfolio-item-thumb {
+            padding: 21px;
+
+            .portfolio-thumb-img img {
+                width: 100%;
+            }
+
+            .portMan-item-sub{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 5px;
+            margin-bottom: -21px;
+            color: $offwhite;
+            
+            .title {
+                font-size: 1.2em;
+            }
+
+            .edit-icons {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 15px;
+                font-size: 1.1em;
+
+            .edit {
+                cursor: pointer;
+                transition: 0.3s ease-in-out;
+
+                &:hover {
+                    color: $teal;
+                }
+            }
+
+            .trash {
+                cursor: pointer;
+                transition: 0.3s ease-in-out;
+
+                &:hover {
+                    color: $warning;
+                }
+            }
+            }
+            }
+        }
+    }
+}

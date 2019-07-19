@@ -1,0 +1,41 @@
+.two-column {
+    .left-column {
+        height: calc(100vh - 84px);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+    }
+
+    .right-column { 
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-left: 21px;
+
+        .info-container {
+            border: 1px solid $teal;
+            padding: 21px 21px;
+            box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.5);
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+                box-shadow: none;
+            }
+
+            .form-group {
+                display: flex;
+                align-items: center;
+                font-size: 1em;
+        
+
+                svg {
+                    font-size: 3em;
+                    color: $teal;
+                    margin-right: 15px;
+                }
+            }
+        }
+
+    }
+}

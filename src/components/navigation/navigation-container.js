@@ -1,14 +1,21 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom"
-
-export default class NavigationContainer extends Component {
-    constructor() {
-        super();
-    }
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { withRouter } from "react-router";
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
+const NavigationComponent = (props) => {
+    const dynamicLink = (route, linkText) => {
+        return(
+        <div className="nav-link-wrapper">
+            <NavLink to={route} activeClassName="nav-link-active">{linkText}</NavLink>
+        </div>);};
 
-    render() {
+    const handleSignOut = () => {
+        axios.delete("https://api.devcamp.space/logout", { withCredentials: true }).then(response => {if (response.status === 200) {props.history.push("/"); props.handleLogout();} return response.data;}).catch(error => {console.log("Error signing out", error);})
+    };
+
         return (
             <div className="nav-wrapper">
             <div className="left-side">
@@ -26,12 +33,18 @@ export default class NavigationContainer extends Component {
             <div className="nav-link-wrapper">
                 <NavLink to="/blog" activeClassName="nav-link-active">Blog</NavLink>
             </div>
-        </div>
+            
+            {props.loggedInStatus === "LOGGED_IN" ? (dynamicLink("/portfolio-manager", "PortfolioManager")) : null}
+
+        </div> 
 
                 <div className="right-side">
                 ISAAK GRETTUM
+                {props.loggedInStatus === "LOGGED_IN" ? <a to="/" onClick={handleSignOut}><FontAwesomeIcon icon="sign-out-alt" /></a> : null}
+                
                 </div>
             </div>
         );
     }
-}
+
+export default withRouter(NavigationComponent);

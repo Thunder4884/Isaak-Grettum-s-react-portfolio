@@ -1,0 +1,12 @@
+.portMan-page-wrapper {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    height: calc(100vh - 84px);
+
+    .right-column {
+        position: relative;
+        background-color: $charcoal;
+        width: 100%;
+        height: 100%;
+    }
+}

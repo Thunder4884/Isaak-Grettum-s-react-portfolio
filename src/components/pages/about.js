@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default function() {
-    return (
-        <div>
-            About
-        </div>
-    );
+import ContentForm from '../about/content-form';
+
+class About extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            aboutModalIsOpen: false,
+        }
+    }
+    
+    render() {
+        return (
+            <div className="about-page-wrapper">   
+                <ContentForm loggedInStatus={this.props.loggedInStatus} />
+            </div>
+        );
+    }
 }
+
+export default About;
